@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2022_06_21_212247) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.float "balance"
+    t.integer "user_id"
   end
 
   create_table "expenses", force: :cascade do |t|

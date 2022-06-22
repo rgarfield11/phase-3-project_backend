@@ -6,7 +6,7 @@ class ApplicationController < Sinatra::Base
     { message: "Good luck with your project!" }.to_json
   end
  
- # USER METHODS
+ # USER CONTROLS
 
   get "/users" do
     users = User.all
@@ -29,7 +29,13 @@ class ApplicationController < Sinatra::Base
     user.to_json
   end
 
-  #ACCOUNT METHODS
+  get "/users/:id" do
+    user = User.find_by(id: params[:id])
+    user.list_accounts
+    user.to_json
+  end
+
+  #ACCOUNT CONTROLS
 
   get "/accounts" do
     accounts = Account.all
@@ -37,9 +43,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/accounts" do
-    account = Account.create(name: params[:name], balance: params[:balance])
+    account = Account.create(name: params[:name], balance: params[:balance], user_id: params[:user_id])
     account.to_json
   end
-    
-
 end
