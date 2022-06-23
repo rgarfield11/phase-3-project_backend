@@ -16,4 +16,23 @@ class AccountController < Sinatra::Base
         account.destroy
         account.to_json
     end
+
+    get "/expenses" do
+        expenses = Expense.all
+        expenses.to_json
+    end
+
+    post "/expenses" do
+        expense = Expense.create(id: params[:id], price: params[:price], description: params[:description], account_id: params[:account_id])
+        expense.to_json
+    end
+
+    patch '/accounts/:id' do
+        balance = Account.find(params[:id])
+        balance.update(
+          balance: params[:balance]
+        )
+        balance.to_json
+      end
+
 end
